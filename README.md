@@ -10,7 +10,7 @@ There are two settings that can be tweaked before running:
 * '''Single Player''': Many of the CoreGui elements, such as health or the emotes menu, are not relevant to a 2D experience. If set to false, then a script that disables these elements, as well as the topbar, is added to the game. If set to true, then a script that disables all CoreGui elements except the Captures menu is added instead.
 
 Regardless of configuration, the following will always occur:
-* CharacterAutoLoads is set to false.
+* `Players.CharacterAutoLoads` is set to false.
 * Default player scripts are replaced with empty folders.
 * `ScreenshotHud.HidePlayerGuiForCaptures` is set to `false`.
 * A script removing the Freecam is added to ServerScriptService.
