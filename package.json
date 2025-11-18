@@ -1,0 +1,23 @@
+{
+  "name": "gameflattener",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "Roblox",
+    "Nevermore",
+    "Lua"
+  ],
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@quenty/basicpane": "^13.21.1",
+    "@quenty/blend": "^12.22.1",
+    "@quenty/loader": "^10.9.0",
+    "@quenty/observablecollection": "^12.24.1",
+    "@quenty/promise": "^10.12.0",
+    "@quenty/safedestroy": "^1.5.0",
+    "@quenty/servicebag": "^11.13.1"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  }
+}
