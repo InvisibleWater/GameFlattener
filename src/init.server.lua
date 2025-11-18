@@ -19,7 +19,7 @@ local ServiceBag = require("ServiceBag")
 local safeDestroy = require("safeDestroy")
 
 local maid = Maid.new()
-local serviceBag = maid:GiveTask(ServiceBag.new())
+local serviceBag = maid:Add(ServiceBag.new())
 
 local PluginSettingsService = serviceBag:GetService(require("PluginSettingsService"))
 serviceBag:GetService(require("ThemeService"))

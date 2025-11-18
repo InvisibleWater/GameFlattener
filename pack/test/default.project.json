@@ -1,0 +1,7 @@
+{
+  "name": "GameFlattenerTest",
+  "globIgnorePaths": [ "**/.package-lock.json" ],
+  "tree": {
+    "$path": "src"
+  }
+}
