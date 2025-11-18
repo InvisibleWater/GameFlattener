@@ -70,9 +70,37 @@ function OptimizeMenu._render(self: OptimizeMenu)
 		Size = UDim2.fromScale(1, 1),
 		BackgroundColor3 = self._themeService:ObserveThemeColor(Enum.StudioStyleGuideColor.MainBackground),
 		Blend.New "Frame" {
+			Position = UDim2.new(),
+			Size = UDim2.fromScale(1, 0.25),
+			BackgroundTransparency = 1,
+			Blend.New "TextLabel" {
+				Position = UDim2.new(),
+				Size = UDim2.fromScale(0.75, 1),
+				BackgroundTransparency = 1,
+				TextScaled = true,
+				Text = "Clear Workspace",
+				TextColor3 = self._themeService:ObserveThemeColor(Enum.StudioStyleGuideColor.BrightText),
+			},
+			[Blend.OnEvent "MouseEnter"] = function()
+				self._maid._currentOption = self._highlightedOption:SetValue("DisableWorkspace")
+			end,
 			self._disableWorkspace.Gui,
 		},
 		Blend.New "Frame" {
+			Position = UDim2.new(),
+			Size = UDim2.fromScale(1, 0.25),
+			BackgroundTransparency = 1,
+			Blend.New "TextLabel" {
+				Position = UDim2.new(),
+				Size = UDim2.fromScale(0.75, 1),
+				BackgroundTransparency = 1,
+				TextScaled = true,
+				Text = "Single Player",
+				TextColor3 = self._themeService:ObserveThemeColor(Enum.StudioStyleGuideColor.BrightText),
+			},
+			[Blend.OnEvent "MouseEnter"] = function()
+				self._maid._currentOption = self._highlightedOption:SetValue("Singleplayer")
+			end,
 			self._singleplayer.Gui,
 		},
 		Blend.New "TextLabel" {
@@ -90,6 +118,8 @@ function OptimizeMenu._render(self: OptimizeMenu)
 						index += a and 1 or 0
 					elseif option == "Singleplayer" then
 						index += b and 1 or 0
+					else
+						return ""
 					end
 
 					return self._highlightText:GetAtListIndex(option, index)
