@@ -43,11 +43,11 @@ function OptimizeMenu.new(serviceBag: ServiceBag.ServiceBag): OptimizeMenu
 	self._disableWorkspace =
 		self._maid:Add(BoolSlider.new(self._settingsService:GetSetting("DisableWorkspace"), serviceBag))
 	self._disableWorkspace.Gui.Position = UDim2.fromScale(0.75, 0)
-	self._disableWorkspace.Gui.Size = UDim2.fromScale(1, 0.25)
+	self._disableWorkspace.Gui.Size = UDim2.fromScale(0.25, 1)
 
 	self._singleplayer = self._maid:Add(BoolSlider.new(self._settingsService:GetSetting("Singleplayer"), serviceBag))
 	self._singleplayer.Gui.Position = UDim2.fromScale(0.75, 0)
-	self._singleplayer.Gui.Size = UDim2.fromScale(1, 0.25)
+	self._singleplayer.Gui.Size = UDim2.fromScale(0.25, 1)
 
 	self._maid:GiveTask(self._disableWorkspace.ActiveChanged:Connect(function(new)
 		self._settingsService:SetSetting("DisableWorkspace", new)
@@ -69,7 +69,7 @@ function OptimizeMenu._render(self: OptimizeMenu)
 		Position = UDim2.new(),
 		Size = UDim2.fromScale(1, 1),
 		BackgroundColor3 = self._themeService:ObserveThemeColor(Enum.StudioStyleGuideColor.MainBackground),
-		Blend.New "Frame" {
+		Blend.New "TextButton" {
 			Position = UDim2.new(),
 			Size = UDim2.fromScale(1, 0.25),
 			BackgroundTransparency = 1,
@@ -77,29 +77,35 @@ function OptimizeMenu._render(self: OptimizeMenu)
 				Position = UDim2.new(),
 				Size = UDim2.fromScale(0.75, 1),
 				BackgroundTransparency = 1,
-				TextScaled = true,
 				Text = "Clear Workspace",
 				TextColor3 = self._themeService:ObserveThemeColor(Enum.StudioStyleGuideColor.BrightText),
+				TextXAlignment = Enum.TextXAlignment.Left,
 			},
 			[Blend.OnEvent "MouseEnter"] = function()
 				self._maid._currentOption = self._highlightedOption:SetValue("DisableWorkspace")
 			end,
+			[Blend.OnEvent "MouseButton1Click"] = function()
+				self._disableWorkspace:Toggle()
+			end,
 			self._disableWorkspace.Gui,
 		},
-		Blend.New "Frame" {
-			Position = UDim2.new(),
+		Blend.New "TextButton" {
+			Position = UDim2.fromScale(0, 0.25),
 			Size = UDim2.fromScale(1, 0.25),
 			BackgroundTransparency = 1,
 			Blend.New "TextLabel" {
 				Position = UDim2.new(),
 				Size = UDim2.fromScale(0.75, 1),
 				BackgroundTransparency = 1,
-				TextScaled = true,
 				Text = "Single Player",
 				TextColor3 = self._themeService:ObserveThemeColor(Enum.StudioStyleGuideColor.BrightText),
+				TextXAlignment = Enum.TextXAlignment.Left,
 			},
 			[Blend.OnEvent "MouseEnter"] = function()
 				self._maid._currentOption = self._highlightedOption:SetValue("Singleplayer")
+			end,
+			[Blend.OnEvent "MouseButton1Click"] = function()
+				self._singleplayer:Toggle()
 			end,
 			self._singleplayer.Gui,
 		},
@@ -107,7 +113,7 @@ function OptimizeMenu._render(self: OptimizeMenu)
 			Position = UDim2.fromScale(0, 0.5),
 			Size = UDim2.fromScale(1, 2 / 6),
 			BackgroundTransparency = 1,
-			TextColor3 = self._themeService:ObserveThemeColor(Enum.StudioStyleGuideColor.InfoText),
+			TextColor3 = self._themeService:ObserveThemeColor(Enum.StudioStyleGuideColor.BrightText),
 			Text = Blend.Computed(
 				self._highlightedOption,
 				self._disableWorkspace,
@@ -135,8 +141,20 @@ function OptimizeMenu._render(self: OptimizeMenu)
 			Text = "Optimize",
 			Font = Enum.Font.SourceSansBold,
 			AutoButtonColor = true,
+			Blend.New "UICorner" {
+				CornerRadius = UDim.new(0.1, 0),
+			},
 			[Blend.OnEvent "MouseButton1Click"] = self.Clicked,
 		},
+		Blend.New "UIPadding" {
+			PaddingBottom = UDim.new(0.05, 0),
+			PaddingTop = UDim.new(0.05, 0),
+			PaddingLeft = UDim.new(0.05, 0),
+			PaddingRight = UDim.new(0.05, 0),
+		},
+		[Blend.OnEvent "MouseLeave"] = function()
+			self._maid._currentOption = nil
+		end,
 		[Blend.Attached(function()
 			local maid = Maid.new()
 

@@ -27,7 +27,7 @@ export type BoolSlider =
 function BoolSlider.new(default: boolean, serviceBag: ServiceBag.ServiceBag): BoolSlider
 	local self = setmetatable(BasicPane.new(), BoolSlider)
 
-	self._active = self._maid:Add(ValueObject.new(default, "boolean"))
+	self._active = self._maid:Add(ValueObject.new(default or false, "boolean"))
 	self._themes = serviceBag:GetService(ThemeService)
 
 	self._maid:GiveTask(self:_render():Subscribe(function(gui)
@@ -46,9 +46,9 @@ function BoolSlider._render(self: BoolSlider)
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromScale(0.75, 0.75),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			BackgroundColor3 = self._themes:ObserveThemeColor(Enum.StudioStyleGuideColor.Button),
+			BackgroundColor3 = self._themes:ObserveThemeColor(Enum.StudioStyleGuideColor.MainButton),
 			[Blend.OnEvent "MouseButton1Click"] = function()
-				self._active.Value = not self._active.Value
+				self:Toggle()
 			end,
 			Blend.New "UICorner" {
 				CornerRadius = UDim.new(1, 0),
@@ -61,6 +61,7 @@ function BoolSlider._render(self: BoolSlider)
 					return UDim2.fromScale(active and 1 or 0, 0.5)
 				end),
 				Size = UDim2.fromScale(1.5, 1.5),
+				AnchorPoint = Vector2.new(0.5, 0.5),
 				BackgroundColor3 = self._themes:ObserveThemeColor(Enum.StudioStyleGuideColor.MainButton),
 				Blend.New "UICorner" {
 					CornerRadius = UDim.new(1, 0),
@@ -71,6 +72,10 @@ function BoolSlider._render(self: BoolSlider)
 			},
 		},
 	}
+end
+
+function BoolSlider.Toggle(self: BoolSlider)
+	self._active.Value = not self._active.Value
 end
 
 function BoolSlider.Observe(self: BoolSlider)
