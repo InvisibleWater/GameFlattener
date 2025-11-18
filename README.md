@@ -4,7 +4,7 @@ Utility for initializing 2D projects on Roblox.
 
 ## Where to obtain
 
-This plugin is available on the [Roblox Creator Store](https://create.roblox.com/store/asset/82557229910945). Of course, you can also get it from here, but purchasing it means that you're supporting a small developer (◕‿◕).
+This plugin is available on the [Roblox Creator Store](https://create.roblox.com/store/asset/82557229910945).
 
 ## How to use
 <img width="328" height="256" alt="image" src="https://github.com/user-attachments/assets/aebbbcd0-e1a8-41f6-8e83-a1c3b6e84285" />
