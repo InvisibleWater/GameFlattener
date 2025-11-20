@@ -1,4 +1,4 @@
-# Gameflattener
+# GameFlattener
 
 Utility for initializing 2D projects on Roblox.
 
