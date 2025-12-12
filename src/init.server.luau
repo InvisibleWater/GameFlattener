@@ -38,6 +38,14 @@ maid:GiveTask(RxInstanceUtils.observeLastNamedChildBrio(Lighting, "Sky", "Sky"):
 	end
 end))
 
+maid:GiveTask(RxInstanceUtils.observeDescendants(script, function(x)
+	return x:IsA("Script") or x:IsA("LocalScript")
+end):Subscribe(function(obj, adding)
+	if adding then
+		obj.Enabled = false
+	end
+end))
+
 local PluginSettingsService = serviceBag:GetService(require("PluginSettingsService"))
 serviceBag:GetService(require("ThemeService"))
 
@@ -269,12 +277,17 @@ end
 local function cleanInterface(full)
 	removeScript(ReplicatedFirst, script.FullCleanInterface)
 	removeScript(ReplicatedFirst, script.SimpleCleanInterface)
-	removeScript(ServerScriptService, script.RemoveFreecam)
+	removeScript(ServerScriptService, script.ServerSimpleCleanInterface)
+	removeScript(ServerScriptService, script.ServerFullCleanInterface)
 
 	if full then
 		local clean = script.FullCleanInterface:Clone()
 		clean.Enabled = true
 		clean.Parent = ReplicatedFirst
+
+		local freecamClean = script.ServerSimpleCleanInterface:Clone()
+		freecamClean.Enabled = true
+		freecamClean.Parent = ServerScriptService
 
 		TextChatService.CreateDefaultCommands = false
 		TextChatService.CreateDefaultTextChannels = false
@@ -288,6 +301,10 @@ local function cleanInterface(full)
 		clean.Enabled = true
 		clean.Parent = ReplicatedFirst
 
+		local freecamClean = script.ServerFullCleanInterface:Clone()
+		freecamClean.Enabled = true
+		freecamClean.Parent = ServerScriptService
+
 		TextChatService.CreateDefaultCommands = true
 		TextChatService.CreateDefaultTextChannels = true
 
@@ -296,10 +313,6 @@ local function cleanInterface(full)
 		TextChatService.ChannelTabsConfiguration.Enabled = true
 		TextChatService.BubbleChatConfiguration.Enabled = false
 	end
-
-	local freecamClean = script.RemoveFreecam:Clone()
-	freecamClean.Enabled = true
-	freecamClean.Parent = ServerScriptService
 end
 
 local function doCleaning()
