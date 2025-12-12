@@ -285,7 +285,7 @@ local function cleanInterface(full)
 		clean.Enabled = true
 		clean.Parent = ReplicatedFirst
 
-		local freecamClean = script.ServerSimpleCleanInterface:Clone()
+		local freecamClean = script.ServerFullCleanInterface:Clone()
 		freecamClean.Enabled = true
 		freecamClean.Parent = ServerScriptService
 
@@ -301,7 +301,7 @@ local function cleanInterface(full)
 		clean.Enabled = true
 		clean.Parent = ReplicatedFirst
 
-		local freecamClean = script.ServerFullCleanInterface:Clone()
+		local freecamClean = script.ServerSimpleCleanInterface:Clone()
 		freecamClean.Enabled = true
 		freecamClean.Parent = ServerScriptService
 
