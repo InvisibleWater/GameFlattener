@@ -22,3 +22,7 @@ local function handleDescendants(descendant)
 end
 
 TextChatService.DescendantAdded:Connect(handleDescendants)
+
+for _, child in TextChatService:GetDescendants() do
+	handleDescendants(child)
+end
